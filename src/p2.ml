@@ -35,11 +35,6 @@ let rec eval_program program pointer =
   | Exit -> program
   | Invalid -> program
 
-let%test "test eval_program" = (List.equal Int.( = )) [2;0;0;0;99] (eval_program [1;0;0;0;99] 0)
-let%test "test eval_program" = (List.equal Int.( = )) [2;3;0;6;99] (eval_program [2;3;0;3;99] 0)
-let%test "test eval_program" = (List.equal Int.( = )) [2;4;4;5;99;9801] (eval_program [2;4;4;5;99;0] 0)
-let%test "test eval_program" = (List.equal Int.( = )) [30;1;1;4;2;5;6;0;99] (eval_program [1;1;1;4;99;5;6;0;99] 0)
-
 let rec find_output program (noun,verb) =
   let updated_program = replace 1 noun program |> replace 2 verb in
   let result = List.hd_exn (eval_program updated_program 0) in
